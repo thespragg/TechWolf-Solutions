@@ -4,10 +4,10 @@ import router from './router'
 import store from './store'
 import VueMq from "vue3-mq"
 
-createApp(App)
-.use(store)
-.use(router)
-.use(VueMq, {
+const app = createApp(App)
+  .use(store)
+  .use(router)
+  .use(VueMq, {
     breakpoints: {
       sm: 450,
       md: 850,
@@ -15,4 +15,4 @@ createApp(App)
       xl: Infinity,
     }
   })
-.mount('#app')
+app.mount('#app')
