@@ -64,12 +64,27 @@
       </a>
     </div>
     <div id="about">
-      <div class="about-top">
-        <div class="headshot-container">
-          <img class="headshot-img" src="@/assets/headshot.jpg" />
+      <div class="about-container">
+        <div class="about-top">
+          <div class="headshot-container">
+            <img class="headshot-img" src="@/assets/headshot.jpg" />
+          </div>
+          <div class="about-header">
+            <p class="about-text-top">
+              I'm a full stack developer with an affinity for problem solving
+              and building anything from simple web pages, to complex business
+              applications.
+            </p>
+            <hr style="width:80%"/>
+            <p class="about-text-bottom">
+              I pride myself on providing an outstanding customer experience,
+              with a focus on providing a stress free and painless service to
+              create whatever you or your business needs.
+            </p>
+          </div>
         </div>
+        <div class="about-bottom"></div>
       </div>
-      <div class="about-bottom"></div>
     </div>
     <div id="blog"></div>
     <div id="more"></div>
@@ -210,7 +225,7 @@ export default {
       animation: bounce 3s ease-in-out infinite;
     }
 
-    svg{
+    svg {
       animation: bounce 3s ease-in-out infinite;
     }
   }
@@ -226,11 +241,12 @@ export default {
     transform: rotate(-25deg) translateX(5%) translateY(90%);
     display: flex;
     align-items: center;
+    z-index: 2;
 
     .triangle-3 {
       width: 0;
       height: 0;
-      z-index: 6;
+      z-index: 1;
       transform: translateX(90%);
       border-left: 170px solid transparent;
       border-right: 170px solid transparent;
@@ -240,7 +256,7 @@ export default {
     .triangle-4 {
       width: 0;
       height: 0;
-      z-index: 5;
+      z-index: 0;
       transform: translateY(10%);
       border-left: 170px solid transparent;
       border-right: 170px solid transparent;
@@ -270,33 +286,65 @@ export default {
 #about {
   min-height: 100vh;
   width: 100vw;
+  box-sizing: border-box;
+  padding-top: 140px;
   background-color: white;
+  position: relative;
 
-.headshot-container{
-  width:250px;
-  height:250px;
-  z-index:2;
+  .about-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
-  .headshot-img{
-    width: 100%;
-    border-radius: 50%;
+    .about-top {
+      align-items: center;
+      justify-content: space-between;
+      display: flex;
+      width: 100%;
+
+      .about-header {
+        width: 75%;
+
+        .about-text-top {
+          font-weight: bold;
+          font-size: 1.5em;
+          margin-bottom:30px;
+        }
+
+        .about-text-bottom {
+          margin-top:30px;
+          font-size: 1.3em;
+        }
+      }
+
+      .headshot-container {
+        width: 20%;
+        z-index: 2;
+
+        .headshot-img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
   }
 }
-}
 
-#blog{
+#blog {
   min-height: 100vh;
   width: 100vw;
   background-color: white;
 }
 
-#more{
+#more {
   min-height: 100vh;
   width: 100vw;
   background-color: white;
 }
 
-#contact{
+#contact {
   min-height: 30vh;
   width: 100vw;
   background-color: #75eaff;
@@ -319,7 +367,7 @@ export default {
       display: flex;
       align-items: center;
       top: 0;
-      z-index:1;
+      z-index: 1;
 
       .triangle {
         width: 0;
