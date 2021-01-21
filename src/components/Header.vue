@@ -1,8 +1,9 @@
 <template>
-  <div class="header">
+  <div class="header" ref="header">
     <div class="container">
       <div class="menu" @click="openMenu = !openMenu">
         <svg
+          class="icon"
           height="32px"
           id="Layer_1"
           style="enable-background: new 0 0 32 32"
@@ -26,13 +27,15 @@
       <div class="nav-container">
         <transition name="expand">
           <div class="nav expand" v-if="!minimizedScreen || openMenu">
-            <a class="nav-link" href="#home">home</a>
+            <a class="nav-link" href="#home" ref="home">home</a>
             <span class="blue nav-break" v-if="!minimizedScreen">.</span>
-            <a class="nav-link" href="#about">about</a>
+            <a class="nav-link" href="#about" ref="about">about</a>
             <span class="blue nav-break" v-if="!minimizedScreen">.</span>
-            <a class="nav-link" href="#">blog</a>
+            <a class="nav-link" href="#blog" ref="blog">blog</a>
             <span class="blue nav-break" v-if="!minimizedScreen">.</span>
-            <a class="nav-link" href="#">contact</a>
+            <a class="nav-link" href="#more" ref="more">more</a>
+            <span class="blue nav-break" v-if="!minimizedScreen">.</span>
+            <a class="nav-link" href="#contact">contact</a>
           </div>
         </transition>
       </div>
@@ -46,11 +49,49 @@ export default {
   data() {
     return {
       openMenu: false,
+      regions: ["home", "about", "blog", "more"],
+      elHeights: [],
+      current: -1,
     };
   },
   computed: {
     minimizedScreen() {
       return this.$mq === "md" || this.$mq === "sm";
+    },
+  },
+  mounted() {
+    this.getElements();
+    this.getRegion();
+
+    var self = this;
+    addEventListener("scroll", () => self.getRegion());
+  },
+  methods: {
+    getElements() {
+      for (let i = 0; i < this.regions.length; i++) {
+        this.elHeights.push(
+          document.getElementById(this.regions[i]).clientHeight
+        );
+      }
+    },
+    getRegion() {
+      if (!this.minimizedScreen) {
+        var height = this.elHeights[0];
+        var index = 0;
+
+        while (document.documentElement.scrollTop >= height - this.$refs.header.clientHeight/2) {
+          index += 1;
+          height += this.elHeights[index];
+        }
+
+        if (this.current != index) {
+          this.current = index;
+          for(let i = 0; i < this.regions.length; i++){
+            this.$refs[this.regions[i]].style.fontWeight = 300
+          }
+          this.$refs[this.regions[index]].style.fontWeight = 700;
+        }
+      }
     },
   },
 };
@@ -159,7 +200,7 @@ export default {
     .nav-container {
       background-color: #303030;
       padding: 20px;
-      width: 300px;
+      width: 350px;
 
       .nav {
         color: white;
@@ -172,6 +213,7 @@ export default {
 
         .nav-break {
           font-size: 1.2em;
+          font-weight: 700;
         }
 
         .nav-link {
