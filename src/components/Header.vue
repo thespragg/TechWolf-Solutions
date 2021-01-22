@@ -1,8 +1,13 @@
 <template>
-  <div class="header" ref="header">
+  <div
+    class="header"
+    :class="minimizedScreen && openMenu ? 'override-header' : ''"
+    ref="header"
+  >
     <div class="container">
-      <div class="menu" @click="openMenu = !openMenu">
+      <div class="menu">
         <svg
+          @click="openMenu = !openMenu"
           class="icon"
           height="32px"
           id="Layer_1"
@@ -79,15 +84,18 @@ export default {
         var height = this.elHeights[0];
         var index = 0;
 
-        while (document.documentElement.scrollTop >= height - this.$refs.header.clientHeight/2) {
+        while (
+          document.documentElement.scrollTop >=
+          height - this.$refs.header.clientHeight / 2
+        ) {
           index += 1;
           height += this.elHeights[index];
         }
 
         if (this.current != index) {
           this.current = index;
-          for(let i = 0; i < this.regions.length; i++){
-            this.$refs[this.regions[i]].style.fontWeight = 300
+          for (let i = 0; i < this.regions.length; i++) {
+            this.$refs[this.regions[i]].style.fontWeight = 300;
           }
           this.$refs[this.regions[index]].style.fontWeight = 700;
         }
@@ -219,6 +227,21 @@ export default {
         .nav-link {
           padding: 5px;
         }
+      }
+    }
+  }
+}
+
+.override-header {
+  background-color: #303030 !important;
+  .menu {
+    .icon {
+      fill: white !important;
+    }
+
+    .logo-container {
+      .logo {
+        color: white !important;
       }
     }
   }
