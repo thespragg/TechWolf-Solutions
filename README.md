@@ -1,5 +1,7 @@
 # techwolf-website
 
+Portfolio and blog for techwolf solutions
+
 ## Project setup
 ```
 npm install
