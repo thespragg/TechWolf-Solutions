@@ -6,12 +6,12 @@
         <img class="half-logo" src="@/assets/half-logo.png" />
       </div>
       <div class="top-triangle-container">
-        <div class="triangle"></div>
-        <div class="triangle-2"></div>
+        <div class="triangle-light"></div>
+        <div class="triangle-dark"></div>
       </div>
       <div class="bottom-triangle-container">
-        <div class="triangle-3"></div>
-        <div class="triangle-4"></div>
+        <div class="triangle-light"></div>
+        <div class="triangle-dark"></div>
       </div>
       <span class="space"></span>
       <div class="tagline">
@@ -75,7 +75,7 @@
               and building anything from simple web pages, to complex business
               applications.
             </p>
-            <hr style="width:80%"/>
+            <hr style="width: 80%" />
             <p class="about-text-bottom">
               I pride myself on providing an outstanding customer experience,
               with a focus on providing a stress free and painless service to
@@ -83,7 +83,48 @@
             </p>
           </div>
         </div>
-        <div class="about-bottom"></div>
+        <div class="about-bottom">
+          <div class="feature-item">
+            <font-awesome-icon
+              class="feature-icon"
+              :icon="['far', 'lightbulb']"
+            />
+            <p>
+              Identifying and solving bottlenecks in your pipeline is vital but
+              hard to do effectively. My experience in a variety of different
+              software ecosystems gives me the insight to identify issues at
+              their source and come up with innovative solutions.
+            </p>
+          </div>
+          <div class="feature-item">
+            <font-awesome-icon
+              class="feature-icon"
+              :icon="['fas', 'user-tie']"
+            />
+            <p>
+              Tailored solutions for any size of business, from internal
+              Infrastructure advice to building bespoke software solutions,
+              whatever your company needs, I can provide.
+            </p>
+          </div>
+          <div class="feature-item">
+            <font-awesome-icon
+              class="feature-icon"
+              :icon="['far', 'chart-bar']"
+            />
+            <p>
+              Making your IT systems work for you is the first step to
+              increasing both productivity and profits. Any pain point can hurt
+              your business growth and stop future scaling, whether this is a
+              misconfiguration of existing software, or the requirement for more
+              bespoke solutions.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="about-triangle-container">
+        <div class="triangle-light"></div>
+        <div class="triangle-dark"></div>
       </div>
     </div>
     <div id="blog"></div>
@@ -232,6 +273,11 @@ export default {
 
   .top-triangle-container {
     position: absolute;
+    transform: rotate(-90deg) translatex(-5%) translateY(-20%);
+    display: flex;
+    align-items: center;
+    top: 0;
+    z-index: 1;
   }
 
   .bottom-triangle-container {
@@ -242,26 +288,6 @@ export default {
     display: flex;
     align-items: center;
     z-index: 2;
-
-    .triangle-3 {
-      width: 0;
-      height: 0;
-      z-index: 1;
-      transform: translateX(90%);
-      border-left: 170px solid transparent;
-      border-right: 170px solid transparent;
-      border-bottom: 170px solid #75eaff;
-    }
-
-    .triangle-4 {
-      width: 0;
-      height: 0;
-      z-index: 0;
-      transform: translateY(10%);
-      border-left: 170px solid transparent;
-      border-right: 170px solid transparent;
-      border-bottom: 170px solid #417d88;
-    }
   }
 
   .tagline {
@@ -269,6 +295,26 @@ export default {
     font-size: 2em;
     width: 40%;
   }
+}
+
+.triangle-light {
+  width: 0;
+  height: 0;
+  z-index: 1;
+  transform: translateX(90%);
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-bottom: 170px solid #75eaff;
+}
+
+.triangle-dark {
+  width: 0;
+  height: 0;
+  z-index: 0;
+  transform: translateY(10%);
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-bottom: 170px solid #417d88;
 }
 
 @keyframes bounce {
@@ -284,12 +330,21 @@ export default {
 }
 
 #about {
+  padding-top: 100px;
   min-height: 100vh;
   width: 100vw;
   box-sizing: border-box;
-  padding-top: 140px;
   background-color: white;
   position: relative;
+
+  .about-triangle-container {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-72%) rotate(17deg);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
 
   .about-container {
     width: 80%;
@@ -297,35 +352,57 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 
     .about-top {
       align-items: center;
       justify-content: space-between;
+      flex-direction: column;
       display: flex;
       width: 100%;
+      margin-bottom: 12%;
 
       .about-header {
         width: 75%;
 
         .about-text-top {
           font-weight: bold;
-          font-size: 1.5em;
-          margin-bottom:30px;
-        }
-
-        .about-text-bottom {
-          margin-top:30px;
-          font-size: 1.3em;
         }
       }
 
       .headshot-container {
-        width: 20%;
+        width: 30%;
         z-index: 2;
+        margin-bottom: 20px;
 
         .headshot-img {
           width: 100%;
           border-radius: 50%;
+        }
+      }
+    }
+
+    .about-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 3;
+
+      .feature-item {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        min-width: 250px;
+        align-items: center;
+        margin: 20px 0;
+
+        .feature-icon {
+          font-size: 5em;
+          color: #303030;
+          margin-bottom: 20px;
         }
       }
     }
@@ -361,32 +438,30 @@ export default {
         opacity: 1;
       }
     }
+  }
 
-    .top-triangle-container {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      top: 0;
-      z-index: 1;
+  #about {
+    padding-top: 200px;
 
-      .triangle {
-        width: 0;
-        height: 0;
-        transform: translateY(-50%);
-        z-index: 11;
-        border-top: 150px solid transparent;
-        border-bottom: 150px solid transparent;
-        border-right: 150px solid #75eaff;
-      }
+    .about-container {
+      .about-top {
+        flex-direction: row;
 
-      .triangle-2 {
-        width: 0;
-        height: 0;
-        transform: translateX(-90%) translateY(-50%);
-        z-index: 10;
-        border-top: 150px solid transparent;
-        border-bottom: 150px solid transparent;
-        border-right: 150px solid #417d88;
+        .about-text-top {
+          font-size: 1.5em;
+          margin-bottom: 30px;
+        }
+
+        .about-text-bottom {
+          margin-top: 30px;
+          font-size: 1.3em;
+        }
+
+        .headshot-container {
+          width: 20%;
+          min-width: 200px;
+          margin-bottom: 0;
+        }
       }
     }
   }
