@@ -40,7 +40,7 @@
             <span class="blue nav-break" v-if="!minimizedScreen">.</span>
             <a class="nav-link" href="#more" ref="more">more</a>
             <span class="blue nav-break" v-if="!minimizedScreen">.</span>
-            <a class="nav-link" href="#contact">contact</a>
+            <a class="nav-link" href="#contact" ref="contact">contact</a>
           </div>
         </transition>
       </div>
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       openMenu: false,
-      regions: ["home", "about", "blog", "more"],
+      regions: ["home", "about", "blog", "more", "contact"],
       elHeights: [],
       current: -1,
     };
